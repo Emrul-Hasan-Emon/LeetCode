@@ -1,0 +1,19 @@
+
+
+int concatenatedBinary(int n) {
+        long long int ans=0, mod=1e9+7, i, start=1;
+        
+        for(i=n; i>=1; i--)
+        {
+            int x=i;
+            while(x>0)
+            {
+                int rem=x%2;
+                if(rem)
+                    ans=(ans+start)%mod;
+                start=(start*2)%mod;
+                x/=2;
+            }
+        }
+        return ans;
+    }
