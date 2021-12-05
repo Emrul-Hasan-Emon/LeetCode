@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int n, i, j;
+        n=1;
+        for(i=1; i<=nums.size(); i++)
+            n*=2;
+        
+        vector<vector<int>>v;
+        vector<int>vec;
+        
+        for(i=0; i<n; i++)
+        {
+            vec.clear();
+            string s;
+            int x=i;
+            while(x>0)
+            {
+                s=(char)(x%2+'0')+s;
+                x/=2;
+            }
+            
+            while(s.size()!=nums.size())
+                s='0'+s;
+            
+            for(j=0; j<nums.size(); j++)
+            {
+                if(s[j]=='1')
+                    vec.push_back(nums[j]);
+            }
+            v.push_back(vec);
+        }
+        return v;
+    }
+};
