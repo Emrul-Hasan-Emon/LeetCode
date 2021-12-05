@@ -1,0 +1,58 @@
+The summary of this problem is we have to find floor(dividend/divisor) without using multiplication, division and modulus operator. As, we multiplication and division is
+one kind of addition and subtraction, we can do this problem using addition and subtraction. But this can leads us to time limit exceed. SO, we will use bit manipulation
+here.
+
+
+    int divide(int dividend, int divisor) {
+        long long int abs_divisor, abs_dividend, ans, sign=0, quotient=0;
+
+        abs_dividend=abs(dividend);
+        abs_divisor=abs(divisor);
+        
+        if(divisor==0)
+            return INT_MAX;
+        
+        if(dividend==INT_MIN && divisor==-1)
+            return INT_MAX;
+        
+        if(divisor<0) sign++;
+        if(dividend<0) sign++; 
+        sign=sign&1;
+        
+        
+        if(abs_divisor==1)
+        {
+            if(sign>0)
+                return -abs_dividend;
+            else
+                return abs_dividend;
+        }
+        
+        if(abs_divisor==abs_dividend)
+        {
+            if(sign>0)
+                return -1;
+            else
+                return 1;
+        }
+        
+        while(abs_dividend>=abs_divisor)
+        {
+            int shift=0;
+            ans=abs_divisor;
+            
+            while(abs_dividend>=ans)
+            {
+                ans=ans<<1;
+                shift++;
+            }
+            
+            shift--;
+            quotient+=(1<<shift);
+            abs_dividend-=abs_divisor<<shift;
+        }
+        if(sign>0)
+            return -quotient;
+        else
+            return quotient;
+    }
