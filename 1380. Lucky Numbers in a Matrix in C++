@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> luckyNumbers (vector<vector<int>>& matrix) {
+        vector<int>lucky_numbers;
+        int i, j, mx_col, m=1e7, mn_row, i1;
+        
+        for(i=0; i<matrix.size(); i++)
+        {
+            mn_row=m;
+            
+            for(j=0; j<matrix[i].size(); j++)
+            {
+                mn_row=min(mn_row, matrix[i][j]);
+            }
+            
+            for(j=0; j<matrix[i].size(); j++)
+            {
+                mx_col=0;
+                
+                for(i1=0; i1<matrix.size(); i1++)
+                {
+                    mx_col=max(mx_col, matrix[i1][j]);
+                }
+                
+                if(mn_row==mx_col && mn_row==matrix[i][j])
+                    lucky_numbers.push_back(matrix[i][j]);
+            }
+        }
+        return lucky_numbers;
+    }
+};
