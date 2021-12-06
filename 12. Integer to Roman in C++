@@ -1,0 +1,37 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+        vector<int>number;
+        vector<string>roman;
+        
+        number.push_back(1); roman.push_back("I");
+        number.push_back(4); roman.push_back("IV");
+        number.push_back(5); roman.push_back("V");
+        number.push_back(9); roman.push_back("IX");
+        number.push_back(10); roman.push_back("X");
+        number.push_back(40); roman.push_back("XL");
+        number.push_back(50); roman.push_back("L");
+        number.push_back(90); roman.push_back("XC");
+        number.push_back(100); roman.push_back("C");
+        number.push_back(400); roman.push_back("CD");
+        number.push_back(500); roman.push_back("D");
+        number.push_back(900); roman.push_back("CM");
+        number.push_back(1000); roman.push_back("M");
+        
+        string to_roman;
+        int i;
+        
+        for(i=number.size()-1; i>=0; i--)
+        {
+            if(num>=number[i])
+            {
+                int x=num/number[i];
+                num=num-(x*number[i]);
+                
+                while(x--)
+                    to_roman+=roman[i];
+            }
+        }
+        return to_roman;
+    }
+};
