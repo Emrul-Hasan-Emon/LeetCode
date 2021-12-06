@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+    int i, j, carry=0;
+    string s, t, res;
+    s=num1;
+    t=num2;
+
+    while(s.size()<t.size())
+        s='0'+s;
+    while(t.size()<s.size())
+        t='0'+t;
+    for(i=s.size()-1; i>=0; i--)
+    {
+        int x, y;
+        x=(s[i]-'0')+(t[i]-'0')+carry;
+        y=x%10; x=x/10;
+        res+=(char)(y+'0');
+        carry=x;
+    }
+    if(carry)
+        res+=(char)(carry+'0');
+    reverse(res.begin(), res.end());
+    return res;
+    }
+};
