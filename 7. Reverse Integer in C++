@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int reverse(int x) {
+        long long _x, sign, xx=0;
+        _x=abs(x);
+        
+        if(x<0)
+            sign=1;
+        else
+            sign=0;
+        
+        while(_x>0)
+        {
+            xx=xx*10+(_x%10);
+            _x/=10;
+        }
+        
+        if(xx>INT_MAX || xx<INT_MIN)
+            return 0;
+        else
+            return (sign>0)?-xx:xx;
+    }
+};
