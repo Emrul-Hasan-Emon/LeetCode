@@ -1,0 +1,63 @@
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+    int i, j, k, zr;
+    string s, t, w, v, res;
+    s=num1; t=num2;
+
+    if(t>s)
+        swap(s, t);
+    
+    for(i=t.size()-1, zr=0; i>=0; i--, zr++)
+    {
+        w.clear();
+        k=zr;
+        while(k--)
+            w+='0';
+
+        int carry=0, x, y;
+        for(j=s.size()-1; j>=0; j--)
+        {
+            x=(s[j]-'0')*(t[i]-'0');
+            x=x+carry;
+            y=x%10; x/=10;
+
+            w=(char)(y+'0')+w;
+            carry=x;
+        }
+
+        if(carry)
+            w=(char)(carry+'0')+w;
+
+        if(res.empty())
+            res=w;
+        else
+        {
+            while(res.size()<w.size())
+                res='0'+res;
+            while(w.size()<res.size())
+                w='0'+w;
+
+            carry=0; v.clear();
+            for(j=w.size()-1; j>=0; j--)
+            {
+                x=(w[j]-'0')+(res[j]-'0')+carry;
+                y=x%10; x/=10;
+                v=(char)(y+'0')+v;
+                carry=x;
+            }
+            if(carry)
+                v=(char)(carry+'0')+v;
+            res=v;
+        }
+    }
+    for(i=0, zr=0; i<res.size(); i++)
+    {
+        if(res[i]=='0')
+            zr++;
+    }
+        if(zr==res.size())
+            return "0";
+    return res;
+    }
+};
