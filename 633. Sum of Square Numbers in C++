@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool judgeSquareSum(int c) {
+        long long a, b, i;
+        
+        for(i=0; i<=100000; i++)
+        {
+            long long int left, right, mid, res;
+            left=0; right=100000;
+            while(left<=right)
+            {
+                mid=(left+right)/2;
+                res=(i*i)+(mid*mid);
+                
+                if(res==c)
+                    return true;
+                else if(res>c)
+                    right=mid-1;
+                else
+                    left=mid+1;
+            }
+        }
+        return false;
+    }
+};
