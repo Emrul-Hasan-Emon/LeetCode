@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int fib(int n) {
+        int now, previous1, previous2, sum, i;
+        if(n==0)
+            return 0;
+        if(n<=2)
+            return 1;
+        
+        previous1=1;
+        previous2=1;
+        
+        n=n-2;
+        while(n--)
+        {
+            sum=previous1+previous2;
+            previous1=previous2;
+            previous2=sum;
+        }
+        return sum;
+    }
+};
