@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int climbStairs(int n) {
+        long long int a[n+5], i;
+        for(i=1; i<=n; i++)
+            a[i]=0;
+        a[1]=a[2]=1;
+        
+        for(i=1; i<=n; i++)
+        {
+            a[i+1]+=a[i];
+            a[i+2]+=a[i];
+        }
+        return a[n];
+    }
+};
