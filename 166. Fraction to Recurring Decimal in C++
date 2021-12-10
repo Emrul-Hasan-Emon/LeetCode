@@ -1,0 +1,64 @@
+class Solution {
+public:
+    string represent_string(long long a, long long b)
+    {
+        if(a==0)
+            return "0";
+        long long sign=0, _a, _b, rem, initial, index;
+        string result;
+
+        if(a<0)
+            sign++;
+        if(b<0)
+            sign++;
+        sign=sign&1;
+
+        _a=abs(a);
+        _b=abs(b);
+
+        initial=_a/_b;
+
+        if(sign)
+            result="-";
+
+        result+=to_string(initial);
+
+        if(_a%_b==0)
+            return result;
+
+        result+=".";
+        map<long, long>mp;
+
+        rem=_a%_b;
+        bool repeat=false;
+
+        while(rem>0 and !repeat)
+        {
+            if(mp[rem]>0)
+            {
+                index=mp[rem];
+                repeat=true;
+                break;
+            }
+            else
+                mp[rem]=result.size();
+
+            rem=rem*10;
+            int temp;
+            temp=rem/_b;
+            result+=to_string(temp);
+            rem=rem%_b;
+        }
+
+        if(repeat)
+        {
+            result+=")";
+            result.insert(index, "(");
+        }
+        return result;
+    }
+    
+    string fractionToDecimal(int numerator, int denominator) {
+        return represent_string(numerator, denominator);
+    }
+};
