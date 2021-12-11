@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string convertToTitle(int columnNumber) {
+        long long i, j, rem, a=columnNumber;
+        string s;
+        while(a>0)
+        {
+            rem=a%26;
+            
+            if(rem==0)
+            {
+                s='Z'+s;
+                a=(a/26)-1;
+            }
+            else
+            {
+                s=(char)(rem+'A'-1)+s;
+                a=a/26;
+            }
+        }
+        return s;
+    }
+};
