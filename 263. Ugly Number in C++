@@ -1,0 +1,40 @@
+class Solution {
+public:
+    
+    bool isUgly(int n) {
+        if(n<=0)
+            return false;
+        
+        long long i, j, p=0, t1=0, t2=0, t3=0, nn;
+        nn=abs(n);
+        
+        for(i=2; i*i<=nn; i++)
+        {
+            if(nn%i==0)
+            {
+                if(i==2) t1++;
+                if(i==3) t2++;
+                if(i==5) t3++;
+                
+                p++;
+                while(nn%i==0)
+                    nn/=i;
+            }
+        }
+        if(nn>1)
+        {
+            if(nn==2) t1++;
+            if(nn==3) t2++;
+            if(nn==5) t3++;
+            p++;
+        }
+        i=0;
+        if(t1) i++;
+        if(t2) i++;
+        if(t3) i++;
+        
+        if(p==i)
+            return true;
+        return false;
+    }
+};
