@@ -1,0 +1,53 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int x) {
+        int n=nums.size(), ans=n, i, j, f=0;
+        
+        int a[n]; 
+        a[0]=nums[0];
+        for(i=1; i<n; i++) a[i]=nums[i]+a[i-1];
+        
+        int sum=0;
+        for(i=n-1, j=1; i>=0; i--, j++)
+        {
+            sum+=nums[i];
+            if(x==sum)
+            {
+                f++;
+                ans=min(ans, j);
+                break;
+            }
+            if(sum>x) break;
+            
+            int p=lower_bound(a, a+n-j, x-sum)-a;
+            if(p<n-j and a[p]==(x-sum))
+            {
+                f++; ans=min(ans, j+p+1);   
+            }
+        }
+        
+        a[n-1]=nums[n-1];
+        for(i=n-2; i>=0; i--) a[i]=nums[i]+a[i+1];
+        reverse(a, a+n);
+        
+        for(i=0, sum=0; i<n; i++)
+        {
+            sum+=nums[i];
+            if(x==sum)
+            {
+                f++;
+                ans=min(ans, i+1);
+                break;
+            }
+            if(sum>x) break;
+            
+            int p=lower_bound(a, a+n-i-1, x-sum)-a;
+            if(p<n-i-1 and a[p]==(x-sum))
+            {
+                f++; ans=min(ans, i+1+p+1);
+            }
+        }
+        if(!f) ans=-1;
+        return ans;
+    }
+};
