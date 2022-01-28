@@ -1,0 +1,75 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        string ans="";
+        int n, i, j;
+        n=s.size();
+        int a[n+1][52], c[52];
+
+        memset(a, 0, sizeof(a));
+        memset(c, 0, sizeof(c));
+
+        for(i=1; i<=n; i++)
+        {
+            if(s[i-1]>='A' and s[i-1]<='Z')
+                a[i][s[i-1]-'A']++;
+            else
+                a[i][s[i-1]-'a'+26]++;
+        }
+
+        for(i=0; i<t.size(); i++)
+        {
+            if(t[i]>='A' and t[i]<='Z')
+                c[t[i]-'A']++;
+            else
+                c[t[i]-'a'+26]++;
+        }
+
+        for(i=1; i<=n; i++)
+        {
+            for(j=0; j<52; j++) a[i][j]+=a[i-1][j];
+    //        for(j=0; j<26; j++) cout<<a[i][j] spc; cout nl;
+        }
+
+        int l=1, r=n, m;
+        while(l<=r)
+        {
+            m=(l+r)/2;
+            int start=-1;
+            j=0;
+            i=m;
+            while(i<=n)
+            {
+                int b[52], f=0, k;
+
+                for(k=0; k<52; k++)
+                    b[k]=a[i][k]-a[j][k];
+
+                for(k=0, f=0; k<52; k++)
+                {
+                    if(c[k]>b[k])
+                    {
+                        f++;
+                        break;
+                    }
+                }
+                if(f==0)
+                {
+                    start=j;
+                    break;
+                }
+                else
+                    i++, j++;
+            }
+            if(start==-1)
+                l=m+1;
+            else
+            {
+                ans.clear(); int k=m;
+                while(k--) ans+=s[start++];
+                r=m-1;
+            }
+        }
+        return ans;
+    }
+};
