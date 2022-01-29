@@ -1,0 +1,23 @@
+class Solution {
+    vector<int>ans;
+public:
+    void answer(int n, int k)
+    {
+        if(k>n)
+            return;
+        if(k)
+            ans.push_back(k);   
+        for(int i=0; i<=9; i++)
+        {
+            if(!k and !i)
+                continue;
+            if(k*10+i<=n)
+                answer(n, k*10+i);
+        }
+    }
+    
+    vector<int> lexicalOrder(int n) {
+        answer(n, 0);
+        return ans;
+    }
+};
