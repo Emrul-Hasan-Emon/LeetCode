@@ -1,0 +1,37 @@
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n, i, j, f;
+        n=wordDict.size();
+        map<string, int>m;
+        for(i=0; i<n; i++)
+        {
+            m[wordDict[i]]++;
+        }
+        n=s.size();
+        bool a[n];
+        memset(a, false, sizeof(a));
+        for(i=0; i<n; i++)
+        {
+            string t="";
+            for(j=i; j>=0; j--)
+            {
+                t=s[j]+t;
+                if(m[t])
+                {
+                    if(j-1<0)
+                    {
+                        a[i]=true;
+                        break;
+                    }
+                    else if(j-1>=0 and a[j-1])
+                    {
+                        a[i]=true;
+                        break;
+                    }
+                }
+            }
+        }
+        return a[n-1];
+    }
+};
