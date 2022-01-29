@@ -1,0 +1,64 @@
+struct node
+{
+    node* child[26];
+    bool flag=false;
+    
+    node()
+    {
+        for(int i=0; i<26; i++)
+            child[i]=NULL;
+    }
+};
+
+class Trie {
+private:
+    node *root;    
+public:
+    Trie() {
+        root=new node();
+    }
+    
+    void insert(string word) {
+        node *temp=root;
+        for(int i=0; i<word.size(); i++)
+        {
+            int x=word[i]-'a';
+            if(temp->child[x]==NULL)
+                temp->child[x]=new node();
+            
+            temp=temp->child[x];
+        }
+        temp->flag=true;
+    }
+    
+    bool search(string word) {
+        node *temp=root;
+        for(int i=0; i<word.size(); i++)
+        {
+            int x=word[i]-'a';
+            if(temp->child[x]==NULL)
+                return false;
+            temp=temp->child[x];
+        }
+        return temp->flag;
+    }
+    bool startsWith(string prefix) {
+        node *temp=root;
+        for(int i=0; i<prefix.size(); i++)
+        {
+            int x=prefix[i]-'a';
+            if(temp->child[x]==NULL)
+                return false;
+            temp=temp->child[x];
+        }
+        return true;
+    }
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
