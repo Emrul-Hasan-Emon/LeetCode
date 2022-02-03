@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool checkPowersOfThree(int n) {
+        vector<int>v;
+        for(int ans=1; ans<=n; ans*=3)
+            v.push_back(ans);
+        
+        for(int i=v.size()-1; i>=0; i--)
+        {
+            if(n>=v[i] and n)
+                n-=v[i];
+        }
+        return n==0;
+    }
+};
