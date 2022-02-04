@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int getSum(int a, int b) {
+        int ans;
+        if(a>=0 and b>=0)
+        {
+            ans=a; while(b--) ans++;
+        }
+        else if(a<0 and b<0)
+        {
+            ans=a; int x=abs(b); while(x--) ans--;
+        }
+        else if(a>=0 and b<0)
+        {
+            ans=b; while(a--) ans++;
+        }
+        else
+        {
+            ans=a; while(b--) ans++;
+        }
+        return ans;
+    }
+};
