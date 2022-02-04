@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maxProduct(vector<string>& words) {
+        int n=words.size(), i, j, k, mx=0;
+        for(i=0; i<n; i++)
+        {
+            int a[26]; memset(a, 0, sizeof(a));
+            for(j=0; j<words[i].size(); j++) a[words[i][j]-'a']++;
+            
+            for(j=i+1; j<n; j++)
+            {
+                int b[26], f=0; memset(b, 0, sizeof(b));
+                for(k=0; k<words[j].size(); k++) b[words[j][k]-'a']++;
+                for(k=0; k<26; k++)
+                    if(a[k] and b[k]) f++;
+                if(!f)
+                {
+                    int x=words[i].size()*words[j].size();
+                    mx=max(mx, x);
+                }
+            }
+        }
+        return mx;
+    }
+};
