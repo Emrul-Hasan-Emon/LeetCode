@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        sort(arr.begin(), arr.end());
+        map<int, int>m;
+        int n=arr.size(), i;
+        for(i=0; i<n; )
+        {
+            int x=arr[i], y=0;
+            while(i<n and arr[i]==x)
+                i++, y++;
+            if(m[y])
+                return false;
+            m[y]++;
+        }
+        return true;
+    }
+};
