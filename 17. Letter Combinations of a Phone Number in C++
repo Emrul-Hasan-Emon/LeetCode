@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<string>v{"0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    vector<string>ans;
+    
+    void answer(int n, string s, string t, int b[])
+    {
+        
+        if(!n){
+            reverse(t.begin(), t.end());
+            ans.push_back(t);
+            return;
+        }
+        for(int i=0; i<n; i++)
+        {
+            int x=s[i]-'0';
+            if(!b[i])
+            {
+                for(int j=0; j<v[x].size(); j++)
+                {
+                    b[i]++;
+                    answer(n-1, s, t+v[x][j], b);
+                    b[i]--;
+                }
+            }
+        }
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        int b[digits.length()];
+        memset(b, 0, sizeof(b));
+        if(digits.empty())
+            return ans;
+        answer(digits.length(), digits, "", b);    
+        return ans;
+    }
+};
