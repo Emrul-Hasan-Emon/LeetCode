@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<string>v;
+    string s="()";
+    
+    void answer(int n, string str)
+    {
+        if(!n)
+        {
+            int a=0;
+            for(int i=0; i<str.size(); i++)
+            {
+                if(str[i]=='(') a++;
+                else a--;
+                if(a<0)
+                    return;
+            }
+            if(a)
+                return;
+            v.push_back(str);
+            return;
+        }
+        for(int i=0; i<2; i++)
+            answer(n-1, str+s[i]);
+    }
+    
+    vector<string> generateParenthesis(int n) {
+        answer(2*n ,"");
+        return v;
+    }
+};
