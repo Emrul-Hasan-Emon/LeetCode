@@ -1,0 +1,22 @@
+class Solution {
+public:
+    
+    int longestValidParentheses(string s) {
+        
+        int a, f, i, j, ans=0, l;
+        for(i=0; i<s.size(); i++)
+        {
+            for(j=i, a=0, f=0, l=0; j<s.size(); j++)
+            {
+                if(s[j]=='(') a++, l++;
+                else a--, l++;
+                if(a<0)
+                {
+                    f++; break;
+                }
+                if(!a) ans=max(ans, l);
+            }
+        }
+        return ans;
+    }
+};
