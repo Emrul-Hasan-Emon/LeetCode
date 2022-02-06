@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int n=height.size(), m, i, ans=0, l, r;
+        l=0; r=n-1;
+        while(l<r)
+        {
+            m=r-l;
+            i=min(height[l], height[r]);
+            
+//            cout<<height[l]<<" "<<height[r]<<" "<<m*i<<endl;
+            
+            ans=max(ans, m*i);
+            if(height[l]>height[r])
+                r--;
+            else
+                l++;
+        }
+        return ans;
+    }
+};
