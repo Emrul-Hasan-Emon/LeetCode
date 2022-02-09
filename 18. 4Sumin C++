@@ -1,0 +1,57 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>>ans;
+        long long i, j, l, r, sum, k, f1, f2;
+        
+        for(i=0; i<nums.size(); i++)
+        {
+            f1=0;
+            for(j=i+1; j<nums.size(); j++)
+            {
+                f2=0;
+                
+                l=j+1; r=nums.size()-1;
+                
+                while(l<r)
+                {
+                    sum=nums[i]; sum+=nums[j]; sum+=nums[l]; sum+=nums[r];
+
+                    if(sum==target)
+                    {
+                    //cout<<nums[i]<<" "<<nums[j]<<" "<<nums[l]<<" "<<nums[r]<<endl;
+                        f1++; f2++; 
+                        
+                        vector<int>v;
+                        v.push_back(nums[i]); v.push_back(nums[j]);
+                        v.push_back(nums[l]); v.push_back(nums[r]);
+                        ans.push_back(v);
+                        
+                        k=nums[l];
+                        while(l<r and nums[l]==k)
+                            l++;
+                        
+                        k=nums[r];
+                        while(r>l and nums[r]==k)
+                            r--;
+                        
+                    }
+                    else if(sum>target) r--;
+                    else l++;
+                }
+                if(f2)
+                {
+                    k=nums[j]; while(j<nums.size() and k==nums[j]) j++;
+                    j--;
+                }
+            }
+            if(f1)
+            {
+                k=nums[i]; while(i<nums.size() and k==nums[i]) i++;
+                i--;
+            }
+        }
+        return ans;
+    }
+};
