@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int n=nums.size(), i, j;
+        
+        if(n==1)
+            return true;
+        
+        int prefix[n+5];
+        memset(prefix, 0, sizeof(prefix));
+        
+        for(i=0; i<n; i++)
+        {
+            int x=nums[i];
+            for(j=i+1; j<n and x>0; j++, x--)
+            {
+                prefix[j]=1;
+            }
+        }
+        
+        if(nums[0]!=0)
+            prefix[0]=1;
+        
+        for(i=0; i<n; i++) cout<<prefix[i]<<" "; cout<<endl;
+        for(i=0; i<n; i++)
+        {
+            if(!prefix[i])
+                return false;
+        }
+        
+        return true;
+    }
+};
