@@ -1,0 +1,21 @@
+Using two pointer method
+
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n=nums.size()-1, l, r, ans=0, i;
+        l=r=0;
+        while(r<n)
+        {
+            int mxm=0;
+            for(i=l; i<=r; i++)
+            {
+                mxm=max(mxm, i+nums[i]);
+            }
+            l=r+1;
+            r=mxm;
+            ans++;
+        }
+        return ans;
+    }
+};
