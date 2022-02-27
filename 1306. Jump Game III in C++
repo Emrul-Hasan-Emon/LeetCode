@@ -1,0 +1,34 @@
+//using Graph
+
+class Solution {
+public:
+    
+    int emon_bhai(vector<int> &a, vector<int>&vis, vector<int>&ans, int start)
+    {
+        if(start<0 or start>=a.size()) return 0;
+        if(a[start]==0) return 1;
+        if(vis[start]) return ans[start];
+        vis[start]++;
+        
+        int p1=0, p2=0l;
+        if(start+a[start]<a.size())
+            p1=emon_bhai(a, vis, ans, start+a[start]);
+        if(start-a[start]>=0)
+            p2=emon_bhai(a, vis, ans, start-a[start]);
+        
+        return ans[start]=max(p1, p2);
+    }
+    
+    bool canReach(vector<int>& arr, int start) {
+        int n=arr.size();
+        vector<int>vis(n), ans(n);
+        
+        for(int i=0; i<n; i++)
+        {
+            vis[i]=0;
+            ans[i]=0;
+        }
+        
+        return emon_bhai(arr, vis, ans, start);
+    }
+};
