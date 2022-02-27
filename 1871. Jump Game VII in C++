@@ -1,0 +1,45 @@
+class Solution {
+public:
+    bool canReach(string s, int minJump, int maxJump) {
+        int n=s.size(), max_reach=0, l, r, f, i, j;
+        if(s[n-1]=='1') return false;
+        
+        vector<pair<int, int> >v(n);
+        
+        v[0].first=minJump;
+        v[0].second=maxJump;
+        if(minJump<=n-1 and maxJump>=n-1) return true;
+        for(i=1, j=1; i<n-1; i++)
+        {
+            if(s[i]=='1')
+                continue;
+            l=0; r=j-1; f=0;
+            while(l<=r)
+            {
+                int m=(l+r)/2;
+                if(i>v[m].second)
+                    l=m+1;
+                else if(i<v[m].first)
+                    r=m-1;
+                else
+                {
+                    f++; break;
+                }                
+            }
+            if(f>0)
+            {
+                int x, y;
+                x=i+minJump;
+                y=i+maxJump;
+                
+                if(x<=n-1 and n-1<=y)
+                    return true;
+                v[j].first=x;
+                v[j].second=y;
+                j++;
+            }
+        }
+        return false;
+    }
+    
+};
